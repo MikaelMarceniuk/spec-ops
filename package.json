@@ -1,0 +1,7 @@
+{
+  "name": "@spec-ops/root",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ]
+}
