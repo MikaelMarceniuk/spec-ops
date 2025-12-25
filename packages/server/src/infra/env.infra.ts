@@ -8,6 +8,9 @@ const envSchema = z.object({
     .startsWith('postgres://', {
       error: 'DATABASE_URL is not a postgres connection string',
     }),
+
+  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_URL: z.url(),
 })
 
 const result = envSchema.safeParse(process.env)
