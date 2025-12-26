@@ -1,10 +1,18 @@
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from 'better-auth/adapters/drizzle'
 import { db } from './db/db.infra'
-import { openAPI } from 'better-auth/plugins'
+import { customSession, openAPI } from 'better-auth/plugins'
 
 export const auth = betterAuth({
-  plugins: [openAPI()],
+  plugins: [
+    openAPI(),
+    customSession(async ({ user }) => ({
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      image: user.image,
+    })),
+  ],
   basePath: '/auth',
   database: drizzleAdapter(db, {
     provider: 'pg',

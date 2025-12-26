@@ -7,10 +7,12 @@ import {
   useSignInByEmailParams,
   useSignInByEmailResult,
 } from '../hooks/use-sign-in-by-email.hook'
+import { useSession } from '../hooks/use-session.hook'
+import { User } from '../types/user.type'
 
 type AuthContext = {
-  // user: User | undefined | null
-  // isFetchingUser: boolean
+  user: User | undefined | null
+  isFetchingUser: boolean
 
   signInByEmail: (
     data: useSignInByEmailParams
@@ -20,11 +22,15 @@ type AuthContext = {
 const AuthContext = createContext({} as AuthContext)
 
 export const AuthProvider: React.FC<withChildren> = ({ children }) => {
+  const { user, isFetching } = useSession()
   const { signInByEmailMutate } = useSignInByEmail()
 
   return (
     <AuthContext.Provider
       value={{
+        user,
+        isFetchingUser: isFetching,
+
         signInByEmail: signInByEmailMutate,
       }}
     >
