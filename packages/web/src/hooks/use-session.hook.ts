@@ -18,7 +18,14 @@ export const useSession = () => {
       try {
         const { data } = await api.get<User | null>('/auth/get-session')
 
-        if (!data) return null
+        if (!data) {
+          if (!pathname?.startsWith('/sign-in')) {
+            toast.warning(`⚠️ Sessão expirada.`)
+            router.replace('/sign-in')
+          }
+
+          return null
+        }
 
         if (pathname.startsWith('/sign-in')) {
           const safeName = data.name?.trim() || 'user'

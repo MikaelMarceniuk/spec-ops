@@ -22,7 +22,7 @@ export const UserAvatar = () => {
   const { user, isFetchingUser, signOut, isSigningOut } = useAuth()
   const router = useRouter()
 
-  if (isFetchingUser) {
+  if (isFetchingUser || !user) {
     return <Skeleton className="size-8 rounded-full" />
   }
 
