@@ -1,12 +1,10 @@
 'use client'
 
-import { ThemeToggler } from '@/src/components/theme-toggler.component'
-import { Button } from '@/src/components/ui/button'
 import { useAuth } from '../providers/auth.provider'
 import { Skeleton } from '../components/ui/skeleton'
 
 export const UserOperationsContent = () => {
-  const { user, isFetchingUser, signOut, isSigningOut } = useAuth()
+  const { user, isFetchingUser } = useAuth()
 
   if (isFetchingUser) {
     return (
@@ -18,7 +16,6 @@ export const UserOperationsContent = () => {
           </div>
 
           <div className="flex flex-row items-center justify-center gap-2">
-            <ThemeToggler />
             <Skeleton className="w-16 h-9" />
           </div>
         </div>
@@ -32,16 +29,6 @@ export const UserOperationsContent = () => {
         <span>
           Autenticado como: <b>{user?.name}</b>
         </span>
-
-        <div className="flex flex-row items-center justify-center gap-2">
-          <ThemeToggler />
-          <Button
-            onClick={signOut}
-            isLoading={isSigningOut}
-          >
-            Deslogar
-          </Button>
-        </div>
       </div>
     </div>
   )
