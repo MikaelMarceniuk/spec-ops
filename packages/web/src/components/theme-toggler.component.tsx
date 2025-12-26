@@ -7,7 +7,7 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from '@/src/components/ui/dropdown-menu'
+} from '@/src/components/animate-ui/components/radix/dropdown-menu'
 import { IconMoon, IconSun } from '@tabler/icons-react'
 
 export function ThemeToggler() {

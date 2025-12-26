@@ -12,7 +12,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
+} from '@/src/components/animate-ui/components/radix/dropdown-menu'
 import { IconLogout } from '@tabler/icons-react'
 import { slugify } from '@/src/utils/slugify.utils'
 import { useRouter } from 'next/navigation'
