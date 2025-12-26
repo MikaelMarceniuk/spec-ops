@@ -3,6 +3,8 @@ import z from 'zod'
 
 const envSchema = z.object({
   NODE_ENV: z.enum(['DEV', 'PRD'], { error: 'NODE_ENV is invalid' }),
+  FRONTEND_URL: z.url(),
+
   DATABASE_URL: z
     .url({ error: 'DATABASE_URL is invalid' })
     .startsWith('postgres://', {
