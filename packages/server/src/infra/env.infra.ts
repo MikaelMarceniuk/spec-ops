@@ -2,17 +2,30 @@ import 'dotenv/config'
 import z from 'zod'
 
 const envSchema = z.object({
-  NODE_ENV: z.enum(['DEV', 'PRD'], { error: 'NODE_ENV is invalid' }),
-  FRONTEND_URL: z.url(),
+  NODE_ENV: z.enum(['DEV', 'PRD'], {
+    error: 'NODE_ENV must be either "DEV" or "PRD"',
+  }),
+
+  FRONTEND_URL: z.url({
+    error: 'FRONTEND_URL must be a valid URL (e.g. https://example.com)',
+  }),
 
   DATABASE_URL: z
-    .url({ error: 'DATABASE_URL is invalid' })
+    .url({
+      error: 'DATABASE_URL must be a valid URL',
+    })
     .startsWith('postgres://', {
-      error: 'DATABASE_URL is not a postgres connection string',
+      error:
+        'DATABASE_URL must be a PostgreSQL connection string starting with "postgres://"',
     }),
 
-  BETTER_AUTH_SECRET: z.string().min(32),
-  BETTER_AUTH_URL: z.url(),
+  BETTER_AUTH_SECRET: z.string().min(32, {
+    error: 'BETTER_AUTH_SECRET must be at least 32 characters long',
+  }),
+  BETTER_AUTH_URL: z.url({
+    error:
+      'BETTER_AUTH_URL must be a valid URL (e.g. https://auth.example.com)',
+  }),
 })
 
 const result = envSchema.safeParse(process.env)
