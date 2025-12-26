@@ -3,6 +3,9 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import { withChildren } from '../types/with-children.type'
 import { ThemeProvider } from '../providers/theme.provider'
+import { QueryClientProvider } from '../providers/query-client.provider'
+import { Toaster } from '../components/ui/sonner'
+import { AuthProvider } from '../providers/auth.provider'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -20,14 +23,19 @@ export default function RootLayout({ children }: withChildren) {
       suppressHydrationWarning
     >
       <body className={`${inter.variable} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          {children}
-        </ThemeProvider>
+        <QueryClientProvider>
+          <AuthProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              {children}
+            </ThemeProvider>
+          </AuthProvider>
+          <Toaster richColors />
+        </QueryClientProvider>
       </body>
     </html>
   )

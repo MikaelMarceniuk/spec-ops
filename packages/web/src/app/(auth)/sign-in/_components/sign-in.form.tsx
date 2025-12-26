@@ -20,6 +20,7 @@ import {
 import { Input } from '@/src/components/ui/input'
 import { useForm } from '@tanstack/react-form'
 import z from 'zod'
+import { useAuth } from '@/src/providers/auth.provider'
 
 type SignInFormProps = React.ComponentProps<'div'>
 
@@ -31,6 +32,8 @@ const signInSchema = z.object({
 })
 
 export const SignInForm = ({ className, ...props }: SignInFormProps) => {
+  const { signInByEmail } = useAuth()
+
   const form = useForm({
     validators: {
       onSubmit: signInSchema,
@@ -39,9 +42,7 @@ export const SignInForm = ({ className, ...props }: SignInFormProps) => {
       email: '',
       password: '',
     },
-    onSubmit: async ({ value }) => {
-      console.log('form.onSubmit.value: ', value)
-    },
+    onSubmit: async ({ value }) => await signInByEmail(value),
   })
 
   return (
@@ -165,7 +166,12 @@ export const SignInForm = ({ className, ...props }: SignInFormProps) => {
               </form.Field>
 
               <Field>
-                <Button type="submit">Entrar</Button>
+                <Button
+                  type="submit"
+                  isLoading={form.state.isSubmitting}
+                >
+                  Entrar
+                </Button>
                 <FieldDescription className="text-center">
                   Não tem uma conta? <a href="#">Cadastre-se</a>
                 </FieldDescription>
