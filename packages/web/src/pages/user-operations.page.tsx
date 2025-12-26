@@ -6,7 +6,7 @@ import { useAuth } from '../providers/auth.provider'
 import { Skeleton } from '../components/ui/skeleton'
 
 export const UserOperationsContent = () => {
-  const { user, isFetchingUser } = useAuth()
+  const { user, isFetchingUser, signOut, isSigningOut } = useAuth()
 
   if (isFetchingUser) {
     return (
@@ -35,7 +35,12 @@ export const UserOperationsContent = () => {
 
         <div className="flex flex-row items-center justify-center gap-2">
           <ThemeToggler />
-          <Button>Deslogar</Button>
+          <Button
+            onClick={signOut}
+            isLoading={isSigningOut}
+          >
+            Deslogar
+          </Button>
         </div>
       </div>
     </div>

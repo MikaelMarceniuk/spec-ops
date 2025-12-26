@@ -9,6 +9,7 @@ import {
 } from '../hooks/use-sign-in-by-email.hook'
 import { useSession } from '../hooks/use-session.hook'
 import { User } from '../types/user.type'
+import { useSignOut } from '../hooks/use-sign-out.hook'
 
 type AuthContext = {
   user: User | undefined | null
@@ -17,6 +18,9 @@ type AuthContext = {
   signInByEmail: (
     data: useSignInByEmailParams
   ) => Promise<useSignInByEmailResult>
+
+  signOut: () => Promise<void>
+  isSigningOut: boolean
 }
 
 const AuthContext = createContext({} as AuthContext)
@@ -24,6 +28,7 @@ const AuthContext = createContext({} as AuthContext)
 export const AuthProvider: React.FC<withChildren> = ({ children }) => {
   const { user, isFetching } = useSession()
   const { signInByEmailMutate } = useSignInByEmail()
+  const { signOut, isSigningOut } = useSignOut()
 
   return (
     <AuthContext.Provider
@@ -32,6 +37,9 @@ export const AuthProvider: React.FC<withChildren> = ({ children }) => {
         isFetchingUser: isFetching,
 
         signInByEmail: signInByEmailMutate,
+
+        signOut,
+        isSigningOut,
       }}
     >
       {children}
