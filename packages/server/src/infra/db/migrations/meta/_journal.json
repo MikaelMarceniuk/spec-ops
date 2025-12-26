@@ -8,6 +8,13 @@
       "when": 1766705442713,
       "tag": "20251225233042_create-better-auth-tables",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1766772012296,
+      "tag": "20251226180012_create-operations-table",
+      "breakpoints": true
     }
   ]
 }
