@@ -12,7 +12,7 @@ export const UserOperationList = () => {
 
   const renderList = () => {
     if (isFetchingOperations) {
-      return Array.from({ length: 4 }).map((_, index) => (
+      return Array.from({ length: 8 }).map((_, index) => (
         <UserOperationCardSkeleton
           key={index}
           view={view}

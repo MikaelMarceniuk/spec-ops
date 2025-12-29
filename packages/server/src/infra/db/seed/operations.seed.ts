@@ -6,7 +6,7 @@ import { operationStatusEnum, operationTable } from '../tables/operation.table'
 import { adminUser } from './constats/admin-user'
 import { faker } from '@faker-js/faker'
 
-const maxOperations = 30
+const maxOperations = 8
 
 const codename = [
   'Expansão Estratégica',
