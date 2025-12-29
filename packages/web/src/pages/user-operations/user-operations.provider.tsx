@@ -9,9 +9,14 @@ import { AxiosError } from 'axios'
 import React, { createContext, useContext, useState } from 'react'
 import { toast } from 'sonner'
 
+type AvailableViews = 'list' | 'grid'
+
 type UserOperationsContext = {
   operations: Operation[]
   isFetchingOperations: boolean
+
+  view: AvailableViews
+  setView: (view: AvailableViews) => void
 
   filters: OperationFilters
   filterChangeHandler: (key: keyof OperationFilters, value: string) => void
@@ -26,6 +31,7 @@ const UserOperationsContext = createContext({} as UserOperationsContext)
 export const UserOperationsProvider: React.FC<withChildren> = ({
   children,
 }) => {
+  const [view, setView] = useState<AvailableViews>('grid')
   const [filters, setFilters] = useState<OperationFilters>({
     q: '',
   })
@@ -64,6 +70,9 @@ export const UserOperationsProvider: React.FC<withChildren> = ({
       value={{
         operations: operations || [],
         isFetchingOperations,
+
+        view,
+        setView,
 
         filters,
         filterChangeHandler,

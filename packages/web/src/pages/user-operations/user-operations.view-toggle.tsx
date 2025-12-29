@@ -6,6 +6,7 @@ import {
 } from '@/src/components/animate-ui/components/radix/toggle-group'
 import { IconLayoutGrid, IconList } from '@tabler/icons-react'
 import { useState } from 'react'
+import { useUserOperations } from './user-operations.provider'
 
 type AvailableViews = 'grid' | 'list'
 
@@ -21,7 +22,7 @@ const availableViews = {
 } as const
 
 export const ViewToggler = () => {
-  const [view, setView] = useState<AvailableViews>('grid')
+  const { view, setView } = useUserOperations()
 
   return (
     <ToggleGroup

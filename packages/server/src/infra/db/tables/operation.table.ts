@@ -8,7 +8,7 @@ import {
 } from 'drizzle-orm/pg-core'
 import { tableTimestamp } from '../helper/timestamp.helper'
 import { tableId } from '../helper/id.helper'
-import { relations } from 'drizzle-orm'
+import { InferSelectModel, relations } from 'drizzle-orm'
 import { userTable } from './user.table'
 
 export const operationStatusEnum = pgEnum('operation_status', [
@@ -38,3 +38,5 @@ export const operationRelations = relations(operationTable, ({ one }) => ({
     references: [userTable.id],
   }),
 }))
+
+export type Operation = InferSelectModel<typeof operationTable>

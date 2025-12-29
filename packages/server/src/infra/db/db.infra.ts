@@ -1,9 +1,14 @@
 import 'dotenv/config'
-import { drizzle } from 'drizzle-orm/node-postgres'
+import { drizzle, NodePgDatabase } from 'drizzle-orm/node-postgres'
 import { env } from '../env.infra'
 import { schema } from './tables/_index'
 
-const db = drizzle(env.DATABASE_URL, { casing: 'snake_case', schema })
+export type DrizzleInstance = NodePgDatabase<typeof schema>
+
+const db: DrizzleInstance = drizzle(env.DATABASE_URL, {
+  casing: 'snake_case',
+  schema,
+})
 
 export async function testDatabaseConnection(
   maxRetries = 5,

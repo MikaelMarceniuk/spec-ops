@@ -1,7 +1,23 @@
 import { Elysia } from 'elysia'
 import { auth } from '../../infra/auth.infra'
 
-export const betterAuthPlugin = new Elysia().mount('/', auth.handler)
+export const betterAuthPlugin = new Elysia({ name: 'better-auth' })
+  .mount('/', auth.handler)
+  .macro({
+    auth: {
+      resolve: async ({ status, request: { headers } }) => {
+        const session = await auth.api.getSession({ headers })
+
+        if (!session) {
+          return status(401, { message: 'Unauthorized. ' })
+        }
+
+        return {
+          user: session,
+        }
+      },
+    },
+  })
 
 let _schema: ReturnType<typeof auth.api.generateOpenAPISchema>
 const getSchema = async () => (_schema ??= auth.api.generateOpenAPISchema())
