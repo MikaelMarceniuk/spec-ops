@@ -12,7 +12,7 @@ export const UserOperationsContent = () => {
       <UserOperationsProvider>
         <UserOperationsToolbar />
 
-        <div className="pt-6 grid gap-6 grid-cols-[30%_1fr]">
+        <div className="pt-6 grid gap-8 grid-cols-[30%_1fr]">
           <div className="space-y-8">
             <UserOperationsAlerts />
             <UserOperationsRecentPreviews />

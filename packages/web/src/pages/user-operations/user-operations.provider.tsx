@@ -19,7 +19,9 @@ type UserOperationsContext = {
   setView: (view: AvailableViews) => void
 
   filters: OperationFilters
+  debouncedFilters: OperationFilters
   filterChangeHandler: (key: keyof OperationFilters, value: string) => void
+  clearFilters: () => void
 }
 
 type OperationFilters = {
@@ -36,6 +38,11 @@ export const UserOperationsProvider: React.FC<withChildren> = ({
     q: '',
   })
   const debouncedFilters = useDebounce(filters)
+
+  const clearFilters = () =>
+    setFilters({
+      q: '',
+    })
 
   const { data: operations, isFetching: isFetchingOperations } = useQuery({
     queryKey: ['/operation', debouncedFilters],
@@ -75,7 +82,9 @@ export const UserOperationsProvider: React.FC<withChildren> = ({
         setView,
 
         filters,
+        debouncedFilters,
         filterChangeHandler,
+        clearFilters,
       }}
     >
       {children}
