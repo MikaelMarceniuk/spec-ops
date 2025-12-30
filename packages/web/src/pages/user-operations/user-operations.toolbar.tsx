@@ -2,10 +2,11 @@
 
 import { Input } from '@/src/components/ui/input'
 import { Button } from '@/src/components/ui/button'
-import { IconChevronDown, IconFilter2 } from '@tabler/icons-react'
+import { IconFilter2 } from '@tabler/icons-react'
 import { ViewToggler } from './user-operations.view-toggle'
 import { Search } from 'lucide-react'
 import { useUserOperations } from './user-operations.provider'
+import { UserOperationsNewDropdown } from './user-operations.new-dropdown'
 
 export const UserOperationsToolbar = () => {
   const { filters, filterChangeHandler } = useUserOperations()
@@ -30,11 +31,7 @@ export const UserOperationsToolbar = () => {
       </Button>
 
       <ViewToggler />
-
-      <Button>
-        Criar novo...
-        <IconChevronDown />
-      </Button>
+      <UserOperationsNewDropdown />
     </div>
   )
 }
