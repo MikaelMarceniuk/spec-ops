@@ -1,10 +1,10 @@
 import { MainContainer } from '../../components/main-container'
-import { UserOperationsAlerts } from './user-operations.alerts'
-import { UserOperationList } from './user-operations.list'
+import { UserOperationsAlerts } from './components/user-operations.alerts'
+import { UserOperationList } from './components/user-operations.list'
 
-import { UserOperationsProvider } from './user-operations.provider'
-import { UserOperationsRecentPreviews } from './user-operations.recent-previews'
-import { UserOperationsToolbar } from './user-operations.toolbar'
+import { UserOperationsProvider } from './providers/user-operations.provider'
+import { UserOperationsRecentPreviews } from './components/user-operations.recent-previews'
+import { UserOperationsToolbar } from './components/user-operations.toolbar'
 
 export const UserOperationsContent = () => {
   return (

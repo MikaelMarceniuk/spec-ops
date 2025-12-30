@@ -1,6 +1,6 @@
 'use client'
 
-import { useUserOperations } from './user-operations.provider'
+import { useUserOperations } from '../providers/user-operations.provider'
 import { UserOperationCard } from './user-operations.card'
 import { UserOperationCardSkeleton } from './user-operations.card-skeleton'
 import { UserOperationsNoResult } from './user-operations.no-result'

@@ -6,7 +6,7 @@ import {
 } from '@/src/components/animate-ui/components/radix/toggle-group'
 import { IconLayoutGrid, IconList } from '@tabler/icons-react'
 import { useState } from 'react'
-import { useUserOperations } from './user-operations.provider'
+import { useUserOperations } from '../providers/user-operations.provider'
 
 type AvailableViews = 'grid' | 'list'
 

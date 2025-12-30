@@ -10,7 +10,7 @@ import {
   EmptyTitle,
 } from '@/src/components/ui/empty'
 import { IconSearchOff } from '@tabler/icons-react'
-import { useUserOperations } from './user-operations.provider'
+import { useUserOperations } from '../providers/user-operations.provider'
 
 export const UserOperationsNoResult = () => {
   const { clearFilters } = useUserOperations()

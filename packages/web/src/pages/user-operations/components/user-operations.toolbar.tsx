@@ -5,7 +5,7 @@ import { Button } from '@/src/components/ui/button'
 import { IconFilter2 } from '@tabler/icons-react'
 import { ViewToggler } from './user-operations.view-toggle'
 import { Search } from 'lucide-react'
-import { useUserOperations } from './user-operations.provider'
+import { useUserOperations } from '../providers/user-operations.provider'
 import { UserOperationsNewDropdown } from './user-operations.new-dropdown'
 
 export const UserOperationsToolbar = () => {
