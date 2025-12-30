@@ -20,6 +20,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/src/components/ui/select'
+import { useCreateOperation } from '@/src/hooks/use-create-operation.hook'
+import { useRouter } from 'next/navigation'
+import { useAuth } from '@/src/providers/auth.provider'
+import { slugify } from '@/src/utils/slugify.utils'
 
 const NewOperationSchema = z.object({
   name: z
@@ -30,12 +34,18 @@ const NewOperationSchema = z.object({
     .date({ error: 'Data de Início deve ser do tipo Data.' })
     .optional(),
   endDate: z.date({ error: 'Data de Fim deve ser do tipo Data.' }).optional(),
-  status: z.enum(operationStatus, {
-    error: 'Status deve ter um valor válido.',
-  }),
+  status: z
+    .enum(operationStatus, {
+      error: 'Status deve ter um valor válido.',
+    })
+    .optional(),
 })
 
 export const NewOperationForm = () => {
+  const { mutateAsync } = useCreateOperation()
+  const router = useRouter()
+  const { user } = useAuth()
+
   const form = useForm({
     validators: {
       onSubmit: NewOperationSchema,
@@ -45,9 +55,15 @@ export const NewOperationForm = () => {
       description: '',
       startDate: undefined,
       endDate: undefined,
-      status: '',
+      status: undefined,
     },
-    onSubmit: async ({ value }) => console.log('NewOperation.value: ', value),
+    onSubmit: async ({ value }) =>
+      await mutateAsync(value, {
+        onSuccess: () => {
+          router.push(`${slugify(user!.name)}-operations`)
+          form.reset()
+        },
+      }),
   })
 
   return (
@@ -89,6 +105,7 @@ export const NewOperationForm = () => {
           <Button
             className="rounded-bl-none rounded-tl-none shrink-0"
             type="submit"
+            isLoading={form.state.isSubmitting}
           >
             <IconPlus />
             Criar
