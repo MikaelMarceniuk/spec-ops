@@ -18,6 +18,15 @@ export const operationStatusEnum = pgEnum('operation_status', [
   'ABORTED',
 ])
 
+export type OperationStatus = (typeof operationStatusEnum.enumValues)[number]
+
+export const operationStatusMapper: Record<OperationStatus, OperationStatus> = {
+  PLANNING: 'PLANNING',
+  ACTIVE: 'ACTIVE',
+  COMPLETED: 'COMPLETED',
+  ABORTED: 'ABORTED',
+}
+
 export const operationTable = pgTable('operations', {
   ...tableId,
 

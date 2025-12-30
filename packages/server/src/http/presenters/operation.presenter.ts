@@ -26,4 +26,15 @@ export class OperationPresenter {
     this.endDate = endDate
     this.status = status
   }
+
+  toJSON() {
+    return {
+      id: this.id,
+      name: this.name,
+      description: this.description,
+      startDate: this.startDate,
+      endDate: this.endDate,
+      status: this.status,
+    }
+  }
 }
